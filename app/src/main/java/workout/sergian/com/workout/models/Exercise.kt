@@ -14,5 +14,5 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "exercises",
         indices = [Index(name = "name", value = "name", unique = true)])
-data class Exercise(@PrimaryKey(autoGenerate = true) var id: Int?,
+data class Exercise(@PrimaryKey(autoGenerate = true) var uid: Int?,
                     @ColumnInfo(name = "name") var name : String)

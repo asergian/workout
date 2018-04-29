@@ -56,7 +56,7 @@ class WorkoutInstrumentedTest {
         }
 
         val retrievedWorkouts = workoutsDatabase.WorkoutDao().getAll()
-        assert(retrievedWorkouts == cachedWorkouts.sortedWith(compareBy({it.id}, {it.id})))
+        assert(retrievedWorkouts == cachedWorkouts.sortedWith(compareBy({it.uid}, {it.uid})))
     }
 
     @Test // Test: Insert 1 Workout, Get that id, ensure that name is persisted
@@ -64,7 +64,7 @@ class WorkoutInstrumentedTest {
         val cachedWorkout = WorkoutFactory.makeWorkoutEntity()
 
         workoutsDatabase.WorkoutDao().insert(cachedWorkout)
-        val retrievedWorkout = workoutsDatabase.WorkoutDao().getWorkout(cachedWorkout.id)
+        val retrievedWorkout = workoutsDatabase.WorkoutDao().getWorkout(cachedWorkout.uid)
 
         assert(retrievedWorkout.name == cachedWorkout.name)
     }
@@ -97,6 +97,6 @@ class WorkoutInstrumentedTest {
 
         val retrievedWorkouts = workoutsDatabase.WorkoutDao().getAll()
 
-        assert(retrievedWorkouts == cachedWorkouts.sortedWith(compareBy({it.id}, {it.id})))
+        assert(retrievedWorkouts == cachedWorkouts.sortedWith(compareBy({it.uid}, {it.uid})))
     }
 } // WorkoutInstrumentedTest

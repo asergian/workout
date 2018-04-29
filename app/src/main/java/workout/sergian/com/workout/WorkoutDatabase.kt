@@ -3,7 +3,9 @@ package workout.sergian.com.workout
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import workout.sergian.com.workout.models.DateConverter
 import workout.sergian.com.workout.models.Exercise
 import workout.sergian.com.workout.models.Workout
 
@@ -12,6 +14,7 @@ import workout.sergian.com.workout.models.Workout
  */
 
 @Database(entities = [Workout::class, Exercise::class], version = 1)
+@TypeConverters(DateConverter::class)
 abstract class WorkoutDatabase : RoomDatabase() {
 
     abstract fun WorkoutDao(): WorkoutDao
@@ -23,7 +26,7 @@ abstract class WorkoutDatabase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(WorkoutDatabase::class) {
                     //Room.inMemoryDatabaseBuilder()
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                    INSTANCE = Room.databaseBuilder(context,
                             WorkoutDatabase::class.java, "workouts.db")
                             .build()
                 }
