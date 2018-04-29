@@ -17,7 +17,7 @@ interface WorkoutDao {
     fun getAll() : List<Workout>
 
     @Query("SELECT * FROM workouts WHERE uid EQUALS :uid")
-    fun getWorkout(uid : Int) : Workout
+    fun getWorkout(uid : Int?) : Workout
 
     @Insert(onConflict = REPLACE)
     fun insert(workout: Workout)
@@ -25,8 +25,8 @@ interface WorkoutDao {
     @Query("UPDATE workouts SET name = :name WHERE uid = :uid")
     fun updateWorkout(name : String, uid : Int)
 
-    //@Query("DELETE from workouts")
-    //fun deleteAll()
+    @Query("DELETE from workouts")
+    fun deleteAll()
 
     @Query("DELETE FROM workouts WHERE uid EQUALS :uid")
     fun deleteWorkout(uid : Int)
