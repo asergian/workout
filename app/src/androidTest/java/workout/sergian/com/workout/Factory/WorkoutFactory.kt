@@ -15,11 +15,11 @@ class WorkoutFactory {
         }
 
         fun makeWorkoutEntityList(count: Int): List<Workout> {
-            val bufferooEntities = mutableListOf<Workout>()
+            val workoutEntities = mutableListOf<Workout>()
             repeat(count) {
-                bufferooEntities.add(makeWorkoutEntity())
+                workoutEntities.add(makeWorkoutEntity())
             }
-            return bufferooEntities
+            return workoutEntities
         } // makeWorkoutEntityList()
     } // Factory
 } // WorkoutFactory

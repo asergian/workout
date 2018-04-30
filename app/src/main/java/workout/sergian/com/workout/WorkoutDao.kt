@@ -1,9 +1,7 @@
 package workout.sergian.com.workout
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
+import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import android.arch.persistence.room.Query
 import workout.sergian.com.workout.models.Workout
 
 /**
@@ -16,18 +14,18 @@ interface WorkoutDao {
     @Query("SELECT * FROM workouts")
     fun getAll() : List<Workout>
 
-    @Query("SELECT * FROM workouts WHERE uid EQUALS :uid")
+    @Query("SELECT * FROM workouts WHERE uid = :uid")
     fun getWorkout(uid : Int?) : Workout
 
     @Insert(onConflict = REPLACE)
     fun insert(workout: Workout)
 
-    @Query("UPDATE workouts SET name = :name WHERE uid = :uid")
-    fun updateWorkout(name : String, uid : Int)
+    @Update(onConflict = REPLACE)
+    fun updateWorkout(workout : Workout)
 
     @Query("DELETE from workouts")
     fun deleteAll()
 
-    @Query("DELETE FROM workouts WHERE uid EQUALS :uid")
-    fun deleteWorkout(uid : Int)
+    @Delete
+    fun deleteWorkout(workout : Workout)
 } // WorkoutDao
