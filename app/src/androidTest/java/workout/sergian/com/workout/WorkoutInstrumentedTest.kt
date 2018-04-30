@@ -43,7 +43,7 @@ class WorkoutInstrumentedTest {
     fun insertWorkoutAddsWorkout() {
         val cachedWorkout = WorkoutFactory.makeWorkoutEntity()
 
-        workoutsDatabase.WorkoutDao().insert(cachedWorkout)
+        workoutsDatabase.WorkoutDao().insertWorkout(cachedWorkout)
 
         val retrievedWorkouts = workoutsDatabase.WorkoutDao().getAll()
         assertTrue(retrievedWorkouts.isNotEmpty())
@@ -54,7 +54,7 @@ class WorkoutInstrumentedTest {
         val cachedWorkouts = WorkoutFactory.makeWorkoutEntityList(3)
 
         cachedWorkouts.forEach {
-            workoutsDatabase.WorkoutDao().insert(it)
+            workoutsDatabase.WorkoutDao().insertWorkout(it)
         }
 
         val retrievedWorkouts = workoutsDatabase.WorkoutDao().getAll()
@@ -65,7 +65,7 @@ class WorkoutInstrumentedTest {
     fun insertWorkoutSavesData() {
         val cachedWorkout = WorkoutFactory.makeWorkoutEntity()
 
-        workoutsDatabase.WorkoutDao().insert(cachedWorkout)
+        workoutsDatabase.WorkoutDao().insertWorkout(cachedWorkout)
 
         val retrievedWorkout = workoutsDatabase.WorkoutDao().getWorkout(cachedWorkout.uid)
         assertTrue(retrievedWorkout.name == cachedWorkout.name)
@@ -76,7 +76,7 @@ class WorkoutInstrumentedTest {
         val cachedWorkouts = WorkoutFactory.makeWorkoutEntityList(2)
 
         cachedWorkouts.forEach {
-            workoutsDatabase.WorkoutDao().insert(it)
+            workoutsDatabase.WorkoutDao().insertWorkout(it)
         }
 
         workoutsDatabase.WorkoutDao().deleteAll()
@@ -89,7 +89,7 @@ class WorkoutInstrumentedTest {
     fun updateNameSavesData() {
         val cachedWorkouts = WorkoutFactory.makeWorkoutEntityList(2)
         cachedWorkouts.forEach {
-            workoutsDatabase.WorkoutDao().insert(it)
+            workoutsDatabase.WorkoutDao().insertWorkout(it)
         }
 
         cachedWorkouts[1].name = "Test Name"
@@ -103,7 +103,7 @@ class WorkoutInstrumentedTest {
     fun deleteWorkoutDeletesData() {
         val cachedWorkouts = WorkoutFactory.makeWorkoutEntityList(2)
         cachedWorkouts.forEach {
-            workoutsDatabase.WorkoutDao().insert(it)
+            workoutsDatabase.WorkoutDao().insertWorkout(it)
         }
 
         val uid = cachedWorkouts[1].uid

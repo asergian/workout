@@ -18,7 +18,7 @@ interface WorkoutDao {
     fun getWorkout(uid : Int?) : Workout
 
     @Insert(onConflict = REPLACE)
-    fun insert(workout: Workout)
+    fun insertWorkout(workout: Workout)
 
     @Update(onConflict = REPLACE)
     fun updateWorkout(workout : Workout)

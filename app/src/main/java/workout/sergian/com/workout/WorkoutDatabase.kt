@@ -18,6 +18,7 @@ import workout.sergian.com.workout.models.Workout
 abstract class WorkoutDatabase : RoomDatabase() {
 
     abstract fun WorkoutDao(): WorkoutDao
+    abstract fun ExerciseDao(): ExerciseDao
 
     companion object {
         private var INSTANCE: WorkoutDatabase? = null
