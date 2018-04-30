@@ -5,6 +5,8 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import workout.sergian.com.workout.controllers.ExerciseDao
+import workout.sergian.com.workout.controllers.WorkoutDao
 import workout.sergian.com.workout.models.DateConverter
 import workout.sergian.com.workout.models.Exercise
 import workout.sergian.com.workout.models.Workout

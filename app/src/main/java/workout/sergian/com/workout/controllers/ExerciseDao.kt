@@ -1,4 +1,4 @@
-package workout.sergian.com.workout
+package workout.sergian.com.workout.controllers
 
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
