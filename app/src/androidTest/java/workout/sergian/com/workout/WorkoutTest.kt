@@ -7,7 +7,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
-import android.util.Log
 import org.junit.Assert.*
 import workout.sergian.com.workout.Factory.WorkoutFactory
 
@@ -24,7 +23,7 @@ import workout.sergian.com.workout.Factory.WorkoutFactory
  */
 
 @RunWith(AndroidJUnit4::class)
-class WorkoutInstrumentedTest {
+class WorkoutTest {
     private lateinit var workoutsDatabase : WorkoutDatabase
 
     @Before
@@ -34,7 +33,6 @@ class WorkoutInstrumentedTest {
     }
 
     @After
-    //@Throws(IOException::class)
     fun closeDb() {
         workoutsDatabase.close()
     }
@@ -113,4 +111,4 @@ class WorkoutInstrumentedTest {
         assertNull(workoutsDatabase.WorkoutDao().getWorkout(uid))
         assertTrue(retrievedWorkouts.size == 1)
     }
-} // WorkoutInstrumentedTest
+} // WorkoutTest

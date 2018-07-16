@@ -1,5 +1,6 @@
 package workout.sergian.com.workout.Factory
 
+import workout.sergian.com.workout.Factory.DataFactory.Factory.randomCategory
 import workout.sergian.com.workout.Factory.DataFactory.Factory.randomInt
 import workout.sergian.com.workout.Factory.DataFactory.Factory.randomString
 import workout.sergian.com.workout.models.Exercise
@@ -10,8 +11,8 @@ import workout.sergian.com.workout.models.Exercise
  */
 class ExerciseFactory {
     companion object Factory {
-        fun makeExerciseEntity(): Exercise {
-            return Exercise(randomInt(), randomString())
+        fun makeExerciseEntity(category : String = randomCategory()): Exercise {
+            return Exercise(randomInt(), randomString(), category)
         }
 
         fun makeExerciseEntityList(count: Int): List<Exercise> {

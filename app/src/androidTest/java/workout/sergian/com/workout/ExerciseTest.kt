@@ -17,14 +17,15 @@ import workout.sergian.com.workout.Factory.ExerciseFactory
  *
  * Test: Insert 1 exercise, ensure it exists in table
  * Test: Insert 3 exercises, Get all, ensure correct number in table
- * Test: Insert 1 exercise, Get that id, ensure that name is persisted
+ * Test: Insert 1 exercise, Get that id, ensure that data is persisted
  * Test: Insert 2 exercises, delete all, ensure table is empty
- * Test: Insert 2 exercises, update one name, get all, ensure names are accurate
+ * Test: Insert 2 exercises, update one, get all, ensure data is persisted
  * Test: Insert 2 exercises, delete one, ensure proper one was deleted
+ * Test: Insert 3 exercises with various categories, get by category, check returned data
  */
 
 @RunWith(AndroidJUnit4::class)
-class ExerciseInstrumentedTest {
+class ExerciseTest {
     private lateinit var workoutsDatabase : WorkoutDatabase
 
     @Before
@@ -61,7 +62,7 @@ class ExerciseInstrumentedTest {
         assertTrue(retrievedExercises == cachedExercises.sortedWith(compareBy({it.uid}, {it.uid})))
     }
 
-    @Test // Test: Insert 1 exercise, Get that id, ensure that name is persisted
+    @Test // Test: Insert 1 exercise, Get that id, ensure that data is persisted
     fun insertExerciseSavesData() {
         val cachedExercise = ExerciseFactory.makeExerciseEntity()
 
@@ -69,6 +70,7 @@ class ExerciseInstrumentedTest {
 
         val retrievedExercise = workoutsDatabase.ExerciseDao().getExercise(cachedExercise.uid)
         assertTrue(retrievedExercise.name == cachedExercise.name)
+        assertTrue(retrievedExercise.category == cachedExercise.category)
     }
 
     @Test // Test: Insert 2 exercises, delete all, ensure table is empty
@@ -85,7 +87,7 @@ class ExerciseInstrumentedTest {
         assertTrue(retrievedExercises.isEmpty())
     }
 
-    @Test // Test: Insert 2 exercises, update one name, get all, ensure names are accurate
+    @Test // Test: Insert 2 exercises, update one, get all, ensure data is persisted
     fun updateNameSavesData() {
         val cachedExercises = ExerciseFactory.makeExerciseEntityList(2)
         cachedExercises.forEach {
@@ -93,6 +95,7 @@ class ExerciseInstrumentedTest {
         }
 
         cachedExercises[1].name = "Test Name"
+        cachedExercises[1].category = "Back"
         workoutsDatabase.ExerciseDao().updateExercises(cachedExercises[1])
 
         val retrievedExercises = workoutsDatabase.ExerciseDao().getAll()
@@ -113,4 +116,21 @@ class ExerciseInstrumentedTest {
         assertNull(workoutsDatabase.ExerciseDao().getExercise(uid))
         assertTrue(retrievedExercises.size == 1)
     }
-} // ExerciseInstrumentedTest
+
+    @Test // Test: Insert 3 exercises with various categories, get by category, check returned data
+    fun getExercisesByCategoryGetsExercises() {
+        val cachedExercises = arrayOf(
+            ExerciseFactory.makeExerciseEntity("Legs"),
+            ExerciseFactory.makeExerciseEntity("Legs"),
+            ExerciseFactory.makeExerciseEntity("Arms")
+        )
+
+        cachedExercises.forEach {
+            workoutsDatabase.ExerciseDao().insertExercises(it)
+        }
+
+        val retrievedExercises = workoutsDatabase.ExerciseDao().getExercisesByCategory("Legs")
+
+        assertTrue(retrievedExercises == cachedExercises.slice(0..1).sortedWith(compareBy({it.uid}, {it.uid})))
+    }
+} // ExerciseTest

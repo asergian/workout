@@ -17,9 +17,13 @@ interface ExerciseDao {
     @Query("SELECT * FROM exercises WHERE uid = :uid")
     fun getExercise(uid : Int?) : Exercise
 
+    @Query("SELECT * FROM exercises WHERE category = :category")
+    fun getExercisesByCategory(category : String?) : List<Exercise>
+
     @Insert(onConflict = REPLACE)
     fun insertExercises(vararg exercise: Exercise)
 
+    // TODO: Do we need this? Insert + onConflict same thing?
     @Update(onConflict = REPLACE)
     fun updateExercises(vararg exercise : Exercise)
 

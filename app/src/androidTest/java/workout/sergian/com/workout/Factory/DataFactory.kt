@@ -1,6 +1,9 @@
 package workout.sergian.com.workout.Factory
 
+import java.lang.Math.random
+import java.util.*
 import java.util.concurrent.ThreadLocalRandom
+import kotlin.math.roundToInt
 
 /**
  * Factory class for random data
@@ -9,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom
 class DataFactory {
 
     companion object Factory {
+        var categories = arrayOf("Legs", "Chest", "Shoulders", "Arms")
 
         fun randomUuid(): String {
             return java.util.UUID.randomUUID().toString()
@@ -18,12 +22,21 @@ class DataFactory {
             return ThreadLocalRandom.current().nextInt(0, 1000 + 1)
         }
 
+        fun randomInt(min_inclusive: Int, max_exclusive: Int): Int {
+            return ThreadLocalRandom.current().nextInt(min_inclusive, max_exclusive)
+        }
+
         fun randomLong(): Long {
             return randomInt().toLong()
         }
 
         fun randomString(): String {
             return randomInt().toString()
+        }
+
+        fun randomCategory() : String {
+            val index = Random().nextInt(categories.size)
+            return categories[index]
         }
 
         fun randomBoolean(): Boolean {
